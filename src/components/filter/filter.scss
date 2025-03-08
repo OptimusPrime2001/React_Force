@@ -1,0 +1,39 @@
+.filter_wrapper {
+    background: #fff;
+    padding: 1rem 1rem 0;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #cdcdcd;
+}
+
+.filter_item {
+    margin-bottom: 1rem;
+
+    label {
+        bottom: 5px;
+        z-index: 1;
+    }
+
+    .MuiInputLabel-formControl {
+        left: 10px;
+    }
+
+    select {
+        width: 100%;
+        padding: 7px 10px 5px;
+        border: unset;
+        border-bottom: 1px solid #4b4b4b;
+        border-radius: 3px 3px 0 0;
+
+        &:hover {
+            border-bottom: 2px solid #000;
+        }
+    }
+}
+.export_ {
+    @media (max-width: 767px) {
+        position: absolute;
+        z-index: 1;
+        right: -5px;
+        top: -60px;
+    }
+}

@@ -1,0 +1,23 @@
+.video_items {
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &:hover {
+        background-color: #f1f1f1;
+    }
+    &.active {
+        background-color: #ECE3DF;
+    }
+
+    .video_item {
+        width: 50%;
+        video {
+            border-radius: 5px;
+        }
+    }
+
+    .video_text {
+        width: 47%;
+    }
+}

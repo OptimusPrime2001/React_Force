@@ -1,0 +1,63 @@
+.list_report {
+    .MuiTableCell-body {
+        padding: 1rem .5rem;
+        text-align: center;
+    }
+
+    .MuiTableCell-head {
+        padding: 1rem .5rem;
+        text-align: center;
+    }
+}
+
+.report_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    .report_header_breadcrumb {
+        display: flex;
+        gap: .5rem;
+        font-weight: 700;
+        .active {
+            color: #0055ab;
+        }
+        .unactive {
+            color: #cdcdcd;
+            
+        }
+    }
+    .form-select {
+        border-radius: 5px;
+        border-color: #cdcdcd;
+    }
+}
+
+.filter_dateft {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+    @media (max-width: 767px) {
+        margin-top: 2rem;
+    }
+}
+
+// .dashboard_container {
+//     max-width: 1200px;
+//     display: block;
+//     margin: auto;
+// }
+
+.report_wraper {
+    margin-top: 2rem;
+    .report_entry {
+        cursor: pointer;
+        color: #fff;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+}
+.minw-90 {
+    min-width: 90px;
+}
