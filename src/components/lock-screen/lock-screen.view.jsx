@@ -104,7 +104,7 @@ const LockScreen = () => {
                 //require("../../assets/images/user-default.png"
                 user && user.avatar && user.avatar !== "null"
                   ? APIUrlDefault + user.avatar
-                  : process.env.PUBLIC_URL + "/user-default.png"
+                  : "/user-default.png"
               }
               alt=""
               style={{

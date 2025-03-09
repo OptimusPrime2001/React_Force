@@ -1,32 +1,29 @@
 import React from "react";
-import { Route } from "react-router-dom";
 import ActivityDetector from "react-activity-detector";
 import {
   getCookies,
   removeCookies,
   setIsShowDialogConfirmRefresh,
 } from "./utils/configuration";
-
-const RouterComponent = ({
-  component: Component,
+const ProtectedRoute = ({
+  element: Element,
   layout: Layout,
   isSetActive = true,
-  ...rest
 }) => {
-  const customActivityEvents = [      
-  "click",
-  "mousemove",
-  "keydown",
-  "DOMMouseScroll",
-  "mousewheel",
-  "mousedown",
-  "touchstart",
-  "touchmove",
-  "focus",];
+  const customActivityEvents = [
+    "click",
+    "mousemove",
+    "keydown",
+    "DOMMouseScroll",
+    "mousewheel",
+    "mousedown",
+    "touchstart",
+    "touchmove",
+    "focus",
+  ];
 
-  const onIdle = () => { 
-    if (getCookies("isLockScreen") != "true")
-    {
+  const onIdle = () => {
+    if (getCookies("isLockScreen") !== "true") {
       setIsShowDialogConfirmRefresh(true);
     }
   };
@@ -38,26 +35,18 @@ const RouterComponent = ({
   };
 
   return (
-    <Route
-      {...rest}
-      render={(props) => (
-        <>
-          {isSetActive && (
-            <ActivityDetector 
-              activityEvents={customActivityEvents}
-              enabled={true}
-              timeout={5 * 60 * 1000}
-              onIdle={onIdle}
-              onActive={onActive}
-            />
-          )}
-          <Layout>
-            <Component {...props} />
-          </Layout>
-        </>
+    <Layout>
+      {isSetActive && (
+        <ActivityDetector
+          activityEvents={customActivityEvents}
+          enabled={true}
+          timeout={5 * 60 * 1000}
+          onIdle={onIdle}
+          onActive={onActive}
+        />
       )}
-    />
+      <Element />
+    </Layout>
   );
 };
-
-export default RouterComponent;
+export default ProtectedRoute;

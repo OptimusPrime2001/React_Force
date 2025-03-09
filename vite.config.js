@@ -14,7 +14,14 @@ export default defineConfig({
   //     },
   //   },
   // },
-  scss: {
-    additionalData: `@forward "./src/assets/styles/_variables.scss";`
-}
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Thêm @use để tự động import file variables
+        // api: 'modern-compiler',
+        additionalData: `@use "/src/assets/styles/_variables.scss";`,
+        silenceDeprecations: ['mixed-decls'],
+      },
+    },
+  },
 })

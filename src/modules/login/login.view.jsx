@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {GenerateDeviceId} from  "../../common/tools";
-import {
-  faUser,
-  faKey,
-  faPlus,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { GenerateDeviceId } from "../../common/tools";
+import { faUser, faKey, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { UrlCollection } from "../../common/url-collection";
 import ShowNotification from "../../components/react-notifications/react-notifications";
@@ -15,14 +10,14 @@ import {
   NotificationMessageType,
   DomainAdminSide,
   setCookiesUser,
-  removeCookies
+  removeCookies,
 } from "../../utils/configuration";
 import * as viVN from "../../language/vi-VN.json";
 import * as accountAction from "../../redux/store/account/account.store";
 
 import "./login.scss";
 
-export default function LoginDesktop(props) {
+export default function LoginDesktop() {
   const [height, setHeight] = useState({
     minHeight: `${window.innerHeight}px`,
   });
@@ -44,7 +39,7 @@ export default function LoginDesktop(props) {
         password: data.password,
         rememberMe: true,
         returnUrl: DomainAdminSide,
-        DeviceId: DeviceId
+        DeviceId: DeviceId,
       })
       .then(
         (res) => {
@@ -63,10 +58,7 @@ export default function LoginDesktop(props) {
         (err) => {
           err &&
             err.errorType &&
-            ShowNotification(
-              err.errorMessage,
-              NotificationMessageType.Error
-            );
+            ShowNotification(err.errorMessage, NotificationMessageType.Error);
         }
       );
   };

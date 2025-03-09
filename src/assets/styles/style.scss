@@ -1,9 +1,7 @@
 // Import Custom SB Admin 2 Variables (Overrides Default Bootstrap Variables)
-@import "variables" ;
-
+// @forward 'variables';
 // Import Bootstrap
 @use "bootstrap/scss/bootstrap";
-
 // Import Custom SB Admin 2 Mixins and Components
 @use "global";
 @use "mixins";

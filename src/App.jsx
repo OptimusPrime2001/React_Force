@@ -1,8 +1,8 @@
 import React from "react";
-import { Router, Routes } from "react-router-dom";
-import RouteComponent from "./route-config.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UrlCollection } from "./common/url-collection";
 import history from "./common/history";
+import ProtectedRoute from "./route-config.jsx";
 
 //--- Loading
 import AppLoading from "./components/loading/loading.view";
@@ -84,257 +84,207 @@ function App() {
     isDesktopOrLaptop: isDesktopOrLaptop,
     isTabletOrMobile: isTabletOrMobile,
     isPortrait: isPortrait,
-    isRetina: isRetina
-  }
+    isRetina: isRetina,
+  };
 
   return (
-    <div>
+    <React.Fragment>
       <DialogWarningExpired />
-      <Router history={history}>
+      <BrowserRouter history={history}>
         <AppLoading />
-        <LockScreen />
         <Routes>
-          <RouteComponent
-            exact
-            layout={LayoutUserView}
-            component={Login}
+          <Route
             path={UrlCollection.Login}
-            isSetActive={false}
+            element={
+              <ProtectedRoute
+                layout={LayoutUserView}
+                element={Login}
+                isSetActive={false}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={LayoutUserView}
-            component={ForgotPassword}
+          <Route
             path={UrlCollection.ForgotPassword}
-            isSetActive={false}
+            element={
+              <ProtectedRoute
+                layout={LayoutUserView}
+                element={ForgotPassword}
+                isSetActive={false}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={LayoutUserView}
-            component={ResetPassword}
+          <Route
             path={UrlCollection.ResetPassword}
-            isSetActive={false}
+            element={
+              <ProtectedRoute
+                layout={LayoutUserView}
+                element={ResetPassword}
+                isSetActive={false}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={() => (
-              <NoLayout>
-                <HomePage />
-              </NoLayout>
-            )}
-            component={HomePage}
+          <Route
             path={UrlCollection.Home}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <NoLayout>
+                    <HomePage />
+                  </NoLayout>
+                )}
+                element={HomePage}
+              />
+            }
           />
-
-          {/* ---------- video store ---------- */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Quản lý bàn làm việc">
-                <ScannerManagement />
-              </LayoutViewWithHook>
-            )}
+          <Route
             path={UrlCollection.ScannerManagement}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook title="Quản lý bàn làm việc">
+                    <ScannerManagement />
+                  </LayoutViewWithHook>
+                )}
+                element={ScannerManagement}
+              />
+            }
           />
-
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Quản lý camera">
-                <CameraManagement />
-              </LayoutViewWithHook>
-            )}
+          <Route
             path={UrlCollection.CameraManagement}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook title="Quản lý camera">
+                    <CameraManagement />
+                  </LayoutViewWithHook>
+                )}
+                element={CameraManagement}
+              />
+            }
           />
-
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Quản lý Đơn hàng">
-                <OrderManagement />
-              </LayoutViewWithHook>
-            )}
+          <Route
             path={UrlCollection.OrderManagement}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook title="Quản lý Đơn hàng">
+                    <OrderManagement />
+                  </LayoutViewWithHook>
+                )}
+                element={OrderManagement}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook>
-                <VideoView />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.OrderVideo + '/:orderCode'}
+          <Route
+            path={UrlCollection.OrderVideo + "/:orderCode"}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook>
+                    <VideoView />
+                  </LayoutViewWithHook>
+                )}
+                element={VideoView}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title={!isTabletOrMobile? "Xếp hạng nhân viên" : null}>
-                <TopUser isTabletOrMobile={isTabletOrMobile} />
-              </LayoutViewWithHook>
-            )}
+          <Route
             path={UrlCollection.TopUser}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook
+                    title={!isTabletOrMobile ? "Xếp hạng nhân viên" : null}
+                  >
+                    <TopUser isTabletOrMobile={isTabletOrMobile} />
+                  </LayoutViewWithHook>
+                )}
+                element={TopUser}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title={!isTabletOrMobile? "Báo cáo của tôi" : null}>
-                <MyReport isTabletOrMobile={isTabletOrMobile} />
-              </LayoutViewWithHook>
-            )}
+          <Route
             path={UrlCollection.MyReport}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook
+                    title={!isTabletOrMobile ? "Báo cáo của tôi" : null}
+                  >
+                    <MyReport isTabletOrMobile={isTabletOrMobile} />
+                  </LayoutViewWithHook>
+                )}
+                element={MyReport}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title={!isTabletOrMobile? "Báo lương của tôi" : null}>
-                <MySalaryReport isTabletOrMobile={isTabletOrMobile} />
-              </LayoutViewWithHook>
-            )}
+          <Route
             path={UrlCollection.MySalaryReport}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook
+                    title={!isTabletOrMobile ? "Báo lương của tôi" : null}
+                  >
+                    <MySalaryReport isTabletOrMobile={isTabletOrMobile} />
+                  </LayoutViewWithHook>
+                )}
+                element={MySalaryReport}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title={!isTabletOrMobile? "Báo cáo tổng" : null}>
-                <AllReport isTabletOrMobile={isTabletOrMobile} />
-              </LayoutViewWithHook>
-            )}
+          <Route
             path={UrlCollection.AllReport}
+            element={
+              <ProtectedRoute
+                layout={() => (
+                  <LayoutViewWithHook
+                    title={!isTabletOrMobile ? "Báo cáo tổng" : null}
+                  >
+                    <AllReport isTabletOrMobile={isTabletOrMobile} />
+                  </LayoutViewWithHook>
+                )}
+                element={AllReport}
+              />
+            }
           />
-          <RouteComponent
-            exact
-            layout={() => {
-              if (isTabletOrMobile) return (
-                <LayoutDetail title="Báo cáo">
-                  <Report isTabletOrMobile={isTabletOrMobile} />
-                </LayoutDetail>
-              )
-              else return (
-                <LayoutViewWithHook title="Báo cáo">
-                  <Report isTabletOrMobile={isTabletOrMobile} />
-                </LayoutViewWithHook>
-              )
-            }}
+          <Route
             path={UrlCollection.Report}
+            element={
+              <ProtectedRoute
+                layout={() => {
+                  if (isTabletOrMobile)
+                    return (
+                      <LayoutDetail title="Báo cáo">
+                        <Report isTabletOrMobile={isTabletOrMobile} />
+                      </LayoutDetail>
+                    );
+                  else
+                    return (
+                      <LayoutViewWithHook title="Báo cáo">
+                        <Report isTabletOrMobile={isTabletOrMobile} />
+                      </LayoutViewWithHook>
+                    );
+                }}
+                element={Report}
+              />
+            }
           />
 
           {/* ---------- video store ---------- */}
 
-          {/* <RouteComponent
-            exact
-            layout={() => (<HomePage reactMediaQuery={reactMediaQuery}/>)}
-            component={HomePage}
+          <Route
             path={UrlCollection.Home}
-          /> */}
-          {/* Role Management */}
-
-          {/* Email Template */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Email Template">
-                <EmailTemplate />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.EmailTemplate}
-          />
-          {/*Email Generated */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Email Generated">
-                <EmailGenerated />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.EmailGenerated}
-          />
-
-          {/* Role Management */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Role Management">
-                <RoleManagement />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.RoleManagement}
-          />
-          {/* Contact Management */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Liên hệ">
-                <ContactManagement />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.ContactManagement}
-          />
-          {/* Log */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Quản lý log">
-                <Log />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.Log}
-          />
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Role Management">
-                <RoleManagement />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.RoleManagement}
-          />
-
-          {/* User Management */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Quản lý người dùng">
-                <UserManagement />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.UserManagement}
-          />
-
-          {/* User log */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutViewWithHook title="Nhật ký người dùng">
-                <UserLogHistory />
-              </LayoutViewWithHook>
-            )}
-            path={UrlCollection.UserLogHistory}
-          />
-
-          {/* my account */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutDetail title="Quản lý tài khoản">
-                <MyAccount isTabletOrMobile={isTabletOrMobile} />
-              </LayoutDetail>
-            )}
-            path={UrlCollection.MyAccount}
-          />
-          {/* Access Denied */}
-          <RouteComponent
-            exact
-            layout={() => (
-              <LayoutView title="">
-                <AccessDenied />
-              </LayoutView>
-            )}
-            path={UrlCollection.AccessDenied}
+            element={
+              <ProtectedRoute
+                layout={() => <HomePage reactMediaQuery={reactMediaQuery} />}
+                element={HomePage}
+              />
+            }
           />
         </Routes>
-      </Router>
-    </div>
+      </BrowserRouter>
+    </React.Fragment>
   );
 }
-
 export default App;
